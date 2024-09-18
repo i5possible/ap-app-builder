@@ -1,9 +1,10 @@
 import React from 'react';
 import NodeLayout from "@/components/NodeLayout";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 export type AIModelNode = {
-    text: string;
+    query: () => void;
+
 }
 
 export type AIModelNodeProps = {
@@ -18,7 +19,9 @@ const AIModelNode: React.FC<AIModelNodeProps> = ({ id, data }) => {
     return (
         <NodeLayout id={id} name={name}>
             <Typography>
-                {data.text as string}
+                <Button variant="contained" color="primary" onClick={() => data.query()}>
+                    Query AI Model
+                </Button>
             </Typography>
         </NodeLayout>
     )

@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import BaseNode from "@/components/BaseNode";
+import React from 'react';
+import NodeLayout from "@/components/NodeLayout";
+import { Typography } from "@mui/material";
+
+export type TextOutputData = {
+    value: string;
+}
 
 export type TextInputNodeProps = {
     id: string;
-    top: number;
-    left: number;
-    onTextChange: (id: string, text: string) => void;
+    data: TextOutputData;
 }
 
-const TextInputNode: React.FC<TextInputNodeProps> = ({ id, top, left, onTextChange }) => {
-    const [text, setText] = useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setText(e.target.value);
-        onTextChange(id, e.target.value);
-    };
-
-    return (<BaseNode id={id} top={top} left={left}>
-        <textarea value={text} onChange={handleChange}/>
-    </BaseNode>)
+const TextInputNode: React.FC<TextInputNodeProps> = ({ id, data }) => {
+    const name = 'Text Output';
+    return (
+        <NodeLayout id={id} name={name}>
+            <Typography>
+                {data.value as string}
+            </Typography>
+        </NodeLayout>
+    )
 };
 
 export default TextInputNode;
